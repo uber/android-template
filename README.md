@@ -23,7 +23,7 @@ This repository provides the following components that are common to our open so
 
 ## Checklist
 
-- [ ] Clone this repository and copy its contents into a new directory with your project's name.
+- [ ] Clone this repository into a folder of your project's name `git clone git@github.com:uber/android-template.git MY_PROJECT`. Or if you're copying the folder, don't forget hidden files!
 - [ ] Reinitialize git
     - [ ] Delete the `.git` folder
     - [ ] Start a git repo with `git init`
