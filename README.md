@@ -53,7 +53,7 @@ Include instructions on how to integrate the library into your projects. For ins
 ```
 dependencies {
   annotationProcessor 'com.uber:annotation-processor:0.0.1'
-  compile 'com.uber:library:0.0.1'
+  implementation 'com.uber:library:0.0.1'
 }
 ```
 
@@ -61,7 +61,7 @@ dependencies {
 
 Provide instructions on how to use and integrate the library into a project.
 
-If there's some special peices for testing (ie Mocks) explain those here as well.
+If there's some special pieces for testing (ie Mocks) explain those here as well.
 
 ## License
 
