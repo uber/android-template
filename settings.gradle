@@ -1,2 +1,23 @@
+pluginManagement {
+    apply from: file('gradle/dependencies.gradle')
+    resolutionStrategy {
+        eachPlugin {
+            switch (requested.id.id) {
+                case 'net.ltgt.errorprone':
+                    useVersion(deps.build.gradlePlugins.errorProne)
+                    break
+                case 'net.ltgt.nullaway':
+                    useVersion(deps.build.gradlePlugins.nullAway)
+                    break
+            }
+        }
+    }
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        jcenter()
+    }
+}
+
 include ':sample-app'
 include ':sample-lib'
