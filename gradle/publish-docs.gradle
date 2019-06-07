@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.uber.mylib;
 
-import static org.junit.Assert.assertEquals;
+configurations {
+    osstrich
+}
 
-import org.junit.Test;
+repositories {
+    mavenCentral()
+}
 
-public class MyClassTest {
+dependencies {
+    osstrich 'com.squareup.osstrich:osstrich:1.4.0'
+}
 
-  @Test
-  public void test() {
-    assertEquals(4, 2 + 2);
-  }
+task publishDocs(type: JavaExec) {
+    classpath = configurations.osstrich
+    main = 'com.squareup.osstrich.JavadocPublisher'
+    args = ['build/javadoc',
+            'https://github.com/uber/android-template',
+            'com.uber.sample']
 }

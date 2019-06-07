@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017. Uber Technologies
+ * Copyright (c) 2019. Uber Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-buildscript {
-    dependencies {
-        classpath deps.build.gradlePlugins.android
-    }
-}
-
 apply plugin: 'com.android.application'
 
 android {
@@ -33,10 +27,6 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
 
     // Setup a simple lint config for an android app/library.
     lintOptions {
@@ -45,20 +35,8 @@ android {
     }
 }
 
-// This is required to run checkstyle on an android app/library.
-task checkstyle(type: Checkstyle) {
-    source 'src'
-    include '**/*.java'
-    exclude '**/gen/**'
-
-    classpath = files()
-}
-check.dependsOn 'checkstyle'
-
-
 dependencies {
-    compile deps.support.appcompat
+    implementation deps.androidx.appcompat
 
-    testCompile deps.test.junit
+    testImplementation deps.test.truth
 }
-

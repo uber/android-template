@@ -1,0 +1,22 @@
+spotless {
+    format 'misc', {
+        target '**/*.md', '**/.gitignore'
+
+        indentWithTabs()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    java {
+        target "**/*.java"
+        googleJavaFormat(deps.versions.gjf)
+        licenseHeaderFile rootProject.file('spotless/copyright.java')
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    groovyGradle {
+        target '**/*.gradle'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}

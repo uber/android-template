@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017. Uber Technologies
+ * Copyright (C) 2019. Uber Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import net.ltgt.gradle.errorprone.CheckSeverity
 
-subprojects {
+buildscript {
+    apply from: rootProject.file('gradle/dependencies.gradle')
     buildscript {
         repositories {
+            google()
+            mavenCentral()
+            gradlePluginPortal()
             jcenter()
         }
-    }
-
-    repositories {
-        jcenter()
-    }
-
-    apply plugin: 'checkstyle'
-
-    checkstyle { -> rootProject
-        configFile rootProject.file('config/checkstyle/checkstyle.xml')
+        dependencies {
+            classpath "com.android.tools.build:gradle:${deps.build.gradlePlugins.android}"
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${deps.build.gradlePlugins.kotlin}"
+            classpath "net.ltgt.gradle:gradle-errorprone-plugin:${deps.build.gradlePlugins.errorProne}"
+            classpath "net.ltgt.gradle:gradle-nullaway-plugin:${deps.build.gradlePlugins.nullAway}"
+            classpath "com.diffplug.spotless:spotless-plugin-gradle:${deps.build.gradlePlugins.spotless}"
+            classpath 'com.vanniktech:gradle-maven-publish-plugin:0.8.0'
+        }
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5.0'
-    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+subprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+
+    apply from: rootProject.file('gradle/dependencies.gradle')
+    apply plugin: 'com.diffplug.gradle.spotless'
+    apply from: rootProject.file('gradle/spotless.gradle')
+
+    apply plugin: 'net.ltgt.errorprone'
+    apply plugin: 'net.ltgt.nullaway'
+    dependencies {
+        errorproneJavac deps.build.errorProneJavac
+        errorprone deps.build.nullAway
+        errorprone deps.build.errorProne
+    }
+    tasks.withType(JavaCompile).configureEach {
+        options.errorprone.nullaway {
+            severity = CheckSeverity.ERROR
+            annotatedPackages.add("com.uber")
+        }
+    }
 }
 
 task clean(type: Delete) {
@@ -42,3 +66,4 @@ task clean(type: Delete) {
 }
 
 apply from: 'gradle/dependencies.gradle'
+apply from: 'gradle/publish-docs.gradle'
