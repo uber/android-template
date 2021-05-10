@@ -1,6 +1,8 @@
 name: Continuous integration
 on:
-  pull_request_target:
+  pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
