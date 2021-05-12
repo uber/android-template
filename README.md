@@ -17,7 +17,6 @@ This repository provides the following components that are common to our open so
 - Links to Codestyle
 - Lint
 - Dependency Management
-- Travis CI Support
 - Maven Central Release Script
 - Proguard Config
 
@@ -35,10 +34,9 @@ This repository provides the following components that are common to our open so
 - [ ] Remove the sample modules `app` and `lib`.
 - [ ] Modify `CHANGELOG.md` to reflect the version of your initial release.
 - [ ] Update this `README.md` file to reflect your project.
-    - [ ] Update the Travis Build Status badge to reflect your project
     - [ ] Delete everything above including these checkboxes
 
-# Project Name [![Build Status](https://travis-ci.org/uber/your-project.svg?branch=master)](https://travis-ci.org/uber/your-project)
+# Project Name ![Build Status](https://github.com/uber/android-template/workflows/CI/badge.svg)
 
 Replace this text with a synopsis of the library.
 
